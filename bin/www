@@ -7,7 +7,18 @@
 var app = require('../app');
 var debug = require('debug')('app-data-jemaat:server');
 var http = require('http');
+const mongoose = require('mongoose')
 require('dotenv').config()
+
+// connect to mongoDB
+mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true }).then(_ => {
+  console.log('Mongo connecting...')
+}).finally(_ => {
+  console.log('Mongo connected.')
+}).catch(err => {
+  console.log('Mongo connection FAILED.')
+  console.error(err)
+})
 
 /**
  * Get port from environment and store in Express.
